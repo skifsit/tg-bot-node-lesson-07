@@ -1,0 +1,18 @@
+{
+  "name": "tg-bot-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/rc": "^1.1.0",
+    "rc": "^1.2.8",
+    "telegraf": "^3.27.1",
+    "typescript": "^3.3.3"
+  }
+}
