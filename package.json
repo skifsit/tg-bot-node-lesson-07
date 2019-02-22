@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/bot/bot.js",
+    "start": "node ./dist/app.test.js",
     "build": "gulp",
     "dev": "gulp dev"
   },

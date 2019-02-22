@@ -1,28 +1,29 @@
-import Telegraf from 'telegraf';
+import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
-import { getConfig } from '../config';
-import { createDBApp, initializeDBApp } from '../db';
-import { UserStatusEnum } from '../db/models';
+import { BotConfigT, ConfigT } from '../config';
+import { DBT } from '../db';
 
-const config = getConfig('eat_test_');
-const bot = new Telegraf(config.bot_section.bot_token);
-const db = createDBApp();
-bot.start(async (ctx) => {
-  if (ctx.from) {
-    const { id, first_name, username } = ctx.from;
-    const idStr = String(id);
+import { startHandler, settingsHandler, helpHandler } from './commands';
+import { BotCommandEnum, getCmdStr } from './commands/commands';
 
-    const dbUser = await db.users.findById(idStr);
-    if (dbUser) {
-      return ctx.reply(`You are already registered! ${dbUser.first_name}`)
-    }
-    const createdDBUser = await db.users.add({ id: idStr, status: UserStatusEnum.registered, first_name, username });
+export type TelegrafBotT = Telegraf<ContextMessageUpdate>;
+export type TlgfCtxT = ContextMessageUpdate & {
+  db: DBT,
+}
 
-    ctx.reply(`You are registered ! ${createdDBUser.first_name}`)
-  }
-});
-(<any>bot).launch()
-  .then(() => initializeDBApp(db))
-  .then(() => {
-    console.log('Bot started')
+export function createTlgfBot(config: BotConfigT): TelegrafBotT {
+  const bot = new Telegraf(config.bot_token);
+  return bot
+}
+
+export async function initializeTlgfBot(tlgfBot: TelegrafBotT, db: DBT, config: ConfigT) {
+  tlgfBot.use((ctx: ContextMessageUpdate, next) => {
+    const newCtx = <TlgfCtxT>ctx;
+    newCtx.db = db;
+    return next && next()
   });
+  tlgfBot.command(getCmdStr(BotCommandEnum.start), <any>startHandler);
+  tlgfBot.command(getCmdStr(BotCommandEnum.settings), <any>settingsHandler);
+  tlgfBot.command(getCmdStr(BotCommandEnum.help), <any>helpHandler);
+  return (<any>tlgfBot).launch()
+}
