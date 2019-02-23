@@ -1,8 +1,8 @@
-import { getConfig } from './config';
+import { createTestConfig } from './config';
 import { createApp, initializeApp } from './app'
 
 async function run() {
-  const config = getConfig('eat_test_');
+  const config = createTestConfig();
   const app = createApp(config);
   return initializeApp(app);
 }

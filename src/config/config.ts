@@ -54,3 +54,8 @@ export function getConfig(name: string): ConfigT {
     db_section: dbConfig,
   }
 }
+
+export function createTestConfig(): ConfigT {
+  const config = getConfig('eat_test_');
+  return config
+}

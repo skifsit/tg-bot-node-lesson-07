@@ -26,6 +26,10 @@ export function createPgDB(config: TConfig): PgDBT {
   }
 }
 
-export async function initializePgDB(dbApp: PgDBT) {
-  await dbApp.db.users.create();
+export async function initializePgDB(pgDB: PgDBT) {
+  await pgDB.db.users.create();
+}
+
+export function destroyPgDb(pgDB: PgDBT) {
+  return pgDB.pgp.end()
 }

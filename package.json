@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node ./dist/app.test.js",
     "build": "gulp",
     "dev": "gulp dev"
@@ -19,12 +19,15 @@
     "telegraf": "^3.27.1"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.6",
     "@types/rc": "^1.1.0",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-nodemon": "^2.4.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-typescript": "^5.0.0",
+    "jest": "^24.1.0",
+    "ts-jest": "^24.0.0",
     "typescript": "^3.3.3"
   }
 }

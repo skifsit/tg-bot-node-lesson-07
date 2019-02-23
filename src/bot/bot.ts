@@ -27,3 +27,7 @@ export async function initializeTlgfBot(tlgfBot: TelegrafBotT, db: DBT, config: 
   tlgfBot.command(getCmdStr(BotCommandEnum.help), <any>helpHandler);
   return (<any>tlgfBot).launch()
 }
+
+export function destroyTlgfBot(tlgfBot: TelegrafBotT) {
+  return tlgfBot.stop()
+}
