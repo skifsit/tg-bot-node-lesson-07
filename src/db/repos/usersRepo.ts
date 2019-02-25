@@ -18,18 +18,29 @@ export class UsersRepository {
     return this.db.none(sql.usrCreate);
   }
 
-  add({ id, status, first_name, username }: UserModel): Promise<UserDBModel> {
+  add({ id, status, first_name, username, language_code }: UserModel): Promise<UserDBModel> {
     return this.db.one(sql.usrAdd, [
       id, 
       status, 
       first_name, 
       username,
+      language_code,
     ]);
   }
 
   findById(id: string): Promise<UserDBModel | null> {
     return this.db.oneOrNone(sql.usrFindById, [
       id
+    ]);
+  }
+
+  update({ id, status, first_name, username, language_code }: UserModel): Promise<UserDBModel | null> {
+    return this.db.oneOrNone(sql.usrUpdate, [
+      id, 
+      status, 
+      first_name, 
+      username,
+      language_code,
     ]);
   }
 }
