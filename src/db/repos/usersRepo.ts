@@ -43,4 +43,8 @@ export class UsersRepository {
       language_code,
     ]);
   }
+
+  deleteAll(): Promise<UserDBModel[]> {
+    return this.db.any(sql.usrDeleteAll)
+  }
 }

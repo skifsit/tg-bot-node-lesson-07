@@ -20,7 +20,7 @@ export type TlgfCtxT = ContextMessageUpdate & {
 }
 
 export function createTlgfBot(config: BotConfigT): TelegrafBotT {
-  const bot = new Telegraf(config.bot_token);
+  const bot = new Telegraf(config.token);
   return bot
 }
 
@@ -52,10 +52,10 @@ function I18nTranslate(t: i18nTrT) {
   return (ctx: TlgfCtxT, next?: Function) => {
     const promise = next && next();
     if (promise) {
-      promise.then((result: any) => {
+      return promise.then((result: any) => {
         if (result && result instanceof ToTranslate) {
           const text = translateResult(t, result);
-          ctx.reply(text)
+          return ctx.reply(text)
         }
       }).catch((err: any) => {
         console.error(err)

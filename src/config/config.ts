@@ -13,12 +13,25 @@ export type DBConfigT = Pick<InitialDBConfigT, Exclude<keyof InitialDBConfigT, "
 }
 
 export type BotConfigT = {
-  bot_token: string,
+  first_name: string,
+  username: string,
+  token: string,
+}
+
+export type InitialUserConfigT = {
+  api_id: string,
+  api_hash: string,
+  phone_number: string,
+}
+
+export type UserConfigT = Pick<InitialUserConfigT, Exclude<keyof InitialUserConfigT, "api_id">> & {
+  api_id: number,
 }
 
 export type ConfigT = {
   bot_section: BotConfigT,
   db_section: DBConfigT,
+  user_section: UserConfigT,
 }
 
 function toNumber(futureNumber: string): number {
@@ -43,15 +56,25 @@ function parseDBconfig(dbConfig: InitialDBConfigT): DBConfigT {
   }
 }
 
+function parseUserconfig(userConfig: InitialUserConfigT): UserConfigT {
+  const api_id = toNumber(userConfig.api_id);
+  return {
+    ...userConfig,
+    api_id,
+  }
+}
+
 export function getConfig(name: string): ConfigT {
   const config = rc(name);
   if (!config) {
     throw new Error(`Config by name ${name} not found!`)
   }
-  const dbConfig = parseDBconfig(config.db_section)
+  const dbConfig = parseDBconfig(config.db_section);
+  const userConfig = parseUserconfig(config.user_section);
   return {
     bot_section: config.bot_section,
     db_section: dbConfig,
+    user_section: userConfig,
   }
 }
 

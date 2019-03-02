@@ -1,0 +1,2 @@
+DELETE FROM users
+RETURNING *

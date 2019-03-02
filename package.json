@@ -5,22 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./dist/app.test.js",
+    "start": "node ./dist/app.bot.test.js",
     "build": "gulp",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "authorize-user": "node ./dist/app.user.authorize.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "airgram": "^0.1.19",
     "i18next": "^15.0.4",
+    "inversify": "^5.0.1",
     "pg": "^7.8.0",
     "pg-promise": "^8.5.5",
+    "promise.prototype.finally": "^3.1.0",
     "rc": "^1.2.8",
+    "reflect-metadata": "^0.1.13",
     "telegraf": "^3.27.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.6",
+    "@types/promise.prototype.finally": "^2.0.3",
     "@types/rc": "^1.1.0",
     "del": "^3.0.0",
     "gulp": "^4.0.0",

@@ -5,5 +5,8 @@ module.exports = {
   testRegex: '__tests__',
   testPathIgnorePatterns: [
     'node_modules', 'dist'
+  ],
+  setupFilesAfterEnv: [
+    './jest.setup.js'
   ]
 }

@@ -40,7 +40,7 @@ function watchTask() {
 
 function botTestTask(done) {
   return nodemon({
-    script: `${outputDir}/app.test.js`,
+    script: `${outputDir}/app.bot.test.js`,
     watch: outputDir,
     delay: '1000',
     done,

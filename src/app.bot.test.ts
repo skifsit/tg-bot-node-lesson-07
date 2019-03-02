@@ -1,10 +1,10 @@
 import { createTestConfig } from './config';
-import { createApp, initializeApp } from './app'
+import { createBotApp, initializeBotApp } from './app.bot'
 
 async function run() {
   const config = createTestConfig();
-  const app = createApp(config);
-  return initializeApp(app);
+  const app = createBotApp(config);
+  return initializeBotApp(app);
 }
 
 run().catch((err) => {

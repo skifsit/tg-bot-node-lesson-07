@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS mtp_authorizations
+(
+    id CHARACTER VARYING(500) NOT NULL UNIQUE,
+    mtp_data JSON NULL
+)

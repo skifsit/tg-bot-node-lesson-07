@@ -1,8 +1,8 @@
-import { createApp } from '../app'
+import { createBotApp } from '../app.bot'
 import { getConfig } from '../config';
 
 test('Simple test', () => {
   const config = getConfig('eat_test_');
-  const app = createApp(config);
+  const app = createBotApp(config);
   expect(true).toBe(true)
 })
